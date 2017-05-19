@@ -3,8 +3,8 @@ This script is used to clean up the MHL file. It will use the regular expression
 Since the MHL file is huge, it may took a long time to excute. (5-10 mins)
 And there might be very few false positive. For example:
 
-# 10.200.4.1 - 64 - Bragg static IPs
-10.200.4.1|-|-|bragg01,bragg-01|-|device|-|runaround,isilon,1ss|Isilon NL400 - 1 Summer Street
+# 10.＊.＊.＊ - 64 - Bragg static IPs
+10.＊.＊.＊|-|-|bragg01,bragg-01|-|device|-|runaround,isilon,1ss|Isilon NL400 - 1 ＊＊＊＊ Street
 
 The first line is just a comment. It's not duplication. But this script will take it as duplication. I don't wanna fix it
 Bite me.
