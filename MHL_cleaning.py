@@ -1,14 +1,17 @@
 '''
-This script is used to clean up the MHL file. It will use the regular expression to find out any duplications.
+This script is used to clean up the MHL file. It uses the regular expression to find out any duplications.
 Since the MHL file is huge, it may took a long time to excute. (5-10 mins)
 And there might be very few false positive. For example:
 
 # 10.＊.＊.＊ - 64 - Bragg static IPs
 10.＊.＊.＊|-|-|bragg01,bragg-01|-|device|-|runaround,isilon,1ss|Isilon NL400 - 1 ＊＊＊＊ Street
 
-The first line is just a comment. It's not duplication. But this script will take it as duplication. I don't wanna fix it
-Bite me.
+The first line is just a comment. It's not duplication. But this script will take it as duplication.
 Author: Peter Chen
+
+Next step: Since the Master Host Listing file is pretty huge, it is much more efficient to use a generator to import the list chunk by chunk.
+Limitation: If one IP address appears in two places which are far away from each other, the script might miss it since I can't make the chunk
+too big, otherwise there would be no need to use generator. 
 '''
 
 import re
