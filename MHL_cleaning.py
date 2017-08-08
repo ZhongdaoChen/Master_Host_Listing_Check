@@ -1,4 +1,6 @@
 '''
+Author: Zhongdao Chen
+
 This script is used to clean up the MHL file. It uses the regular expression to find out any duplications.
 Since the MHL file is huge, it may took a long time to excute. (5-10 mins)
 And there might be very few false positive. For example:
@@ -7,11 +9,9 @@ And there might be very few false positive. For example:
 10.＊.＊.＊|-|-|bragg01,bragg-01|-|device|-|runaround,isilon,1ss|Isilon NL400 - 1 ＊＊＊＊ Street
 
 The first line is just a comment. It's not duplication. But this script will take it as duplication.
-Author: Peter Chen
 
-Next step: Since the Master Host Listing file is pretty huge, it is much more efficient to use a generator to import the list chunk by chunk.
-Limitation: If one IP address appears in two places which are far away from each other, the script might miss it since I can't make the chunk
-too big, otherwise there would be no need to use generator. 
+Next step: Since the Master Host Listing file is pretty huge and still growing, it is much more efficient to use a generator to import the list chunk by chunk.
+Limitation: If one IP address appears in two places which are far away from each other, the script might miss it since I can't make the chunk too big, otherwise there is no need to use generator. 
 '''
 
 import re
@@ -36,7 +36,7 @@ try:
 finally:
     file_object.close()
 
-pattern_ip = re.compile(r'\d{1,3}\.\d{1,3}\.\d{1,3}\.[1-9]{1,3}')     # I know it's ugly..bite me
+pattern_ip = re.compile(r'\d{1,3}\.\d{1,3}\.\d{1,3}\d{1,3}')     # I know it's ugly...Let me make it work first
 all_ip = list(set(pattern_ip.findall(all_the_text)))    # Find all IPs and delete the repetitive ones, convert to list again
 print(all_ip) # This is just for mornitoring the process and debugging.
 fp_result = open('./MHL_check_result.txt','w')
